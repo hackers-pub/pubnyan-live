@@ -64,6 +64,43 @@ test('blink reopening leaves the closed hold gently without a one-frame pop', as
   expect(sampleVec2(lid, 0.22 + 1 / 60)[1] - closed).toBeLessThan(0.08);
 });
 
+test('pupils do not split a barely reopened blink into two white corners', async () => {
+  const { blink } = await import('./clips/expression-motion.ts');
+  const { groupTracks, sampleNumeric, sampleVec2 } = await import('#ir/sample.ts');
+  const tracks = groupTracks({...clips.find(c => c.name === 'wink')!, tracks: blink(1, .1)});
+  for (let t = .22; t < .4; t += 1 / 240) {
+    const height = sampleVec2(tracks.get('eye-l.white')!.scale!, t)[1];
+    if (height < .2) expect(sampleNumeric(tracks.get('eye-l.pupil')!.opacity!, t)).toBeLessThan(.05);
+  }
+});
+
+test('expression returns keep pupils hidden until the opening aperture clears the thin-lid phase', async () => {
+  const { groupTracks, sampleNumeric, sampleVec2 } = await import('#ir/sample.ts');
+  for (const clip of clips.filter(c => /^(to|from)-/.test(c.name))) {
+    const tracks = groupTracks(clip);
+    for (let t = .15; t < .333; t += 1 / 240) {
+      for (const side of ['l', 'r']) {
+        const lid = tracks.get(`eye-${side}.white`)!.scale!;
+        const pupil = tracks.get(`eye-${side}.pupil`)!.opacity!;
+        if (sampleVec2(lid, t)[1] < .2) expect(sampleNumeric(pupil, t), `${clip.name}@${t}`).toBeLessThan(.05);
+      }
+    }
+  }
+});
+
+test('internal expression bridges also conceal pupils in the thin reopening phase', async () => {
+  const { expressionBridges } = await import('./clips/expression-bridges.ts');
+  const { groupTracks, sampleNumeric, sampleVec2 } = await import('#ir/sample.ts');
+  for (const destinations of Object.values(expressionBridges)) for (const bridge of Object.values(destinations)) {
+    const tracks = groupTracks(bridge);
+    for (let t = 2 / 15; t < .4; t += 1 / 240) {
+      if (sampleVec2(tracks.get('eye-l.white')!.scale!, t)[1] < .2) {
+        expect(sampleNumeric(tracks.get('eye-l.pupil')!.opacity!, t), `${bridge.name}@${t}`).toBeLessThan(.05);
+      }
+    }
+  }
+});
+
 test('pupils retain their dimensions while lids blink or smile', () => {
   const rig = getRig('pubnyan');
   for (const clip of clips.filter(c => c.rig === rig.name && !/^(to|from)-/.test(c.name))) {

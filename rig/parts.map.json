@@ -253,6 +253,16 @@
             "eye-r.pupil": "pupil-r-happy"
           }
         },
+        "drowsy": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": { "nose": "path23", "eye-l.white": "path11#outer", "eye-r.white": "path9#outer" },
+          "overrides": { "nose": "normal-nose-aligned", "eye-l.white": "eye-l-drowsy", "eye-r.white": "eye-r-drowsy" }
+        },
+        "resting-eyes": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": { "nose": "path23", "eye-l.white": "path11#outer", "eye-r.white": "path9#outer" },
+          "overrides": { "nose": "normal-nose-aligned", "eye-l.white": "eye-l-resting", "eye-r.white": "eye-r-resting" }
+        },
         "closed": {
           "file": "pubnyan-normal-transparent.svg",
           "map": {

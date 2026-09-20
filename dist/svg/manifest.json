@@ -82,6 +82,46 @@
       "file": "celebrate.svg"
     },
     {
+      "name": "slow-blink",
+      "rig": "pubnyan",
+      "duration": 3.2,
+      "fps": 60,
+      "loop": false,
+      "file": "slow-blink.svg"
+    },
+    {
+      "name": "sleepy",
+      "rig": "pubnyan",
+      "duration": 4.4,
+      "fps": 60,
+      "loop": false,
+      "file": "sleepy.svg"
+    },
+    {
+      "name": "proud",
+      "rig": "pubnyan",
+      "duration": 3.6,
+      "fps": 60,
+      "loop": false,
+      "file": "proud.svg"
+    },
+    {
+      "name": "feign-ignore",
+      "rig": "pubnyan",
+      "duration": 3.8,
+      "fps": 60,
+      "loop": false,
+      "file": "feign-ignore.svg"
+    },
+    {
+      "name": "ring-side-eye",
+      "rig": "pubnyan",
+      "duration": 4.8,
+      "fps": 60,
+      "loop": false,
+      "file": "ring-side-eye.svg"
+    },
+    {
       "name": "expr-angry",
       "rig": "pubnyan",
       "duration": 4.6,

@@ -19,8 +19,8 @@ export default clip('to-cry', { rig: 'pubnyan', duration: 0.4, fps: 60, loop: fa
       key(1 / 3, [1, 1], 'inOutSine'), key(0.4, [1, 1])])]),
   ]),
   ...eyes.filter(part => part.endsWith('.pupil')).map(part => track(part, 'opacity', [
-    key(0, 1), key(0.085, 1), key(0.1, 0, 'inOutSine'),
-    key(0.15, 0), key(1 / 6, 1, 'inOutSine'), key(0.4, 1),
+    key(0, 1), key(0.075, 1), key(0.09, 0, 'inOutSine'),
+    key(0.195, 0), key(0.23, 1, 'inOutSine'), key(0.4, 1),
   ])),
   morph('tear-l'),
   morph('tear-r'),

@@ -67,7 +67,7 @@ export default clip('celebrate', { rig: 'pubnyan', duration: 1.5, fps: 60, loop:
     ]),
   ]),
   ...['eye-l.pupil', 'eye-r.pupil'].map(part => track(part, 'opacity', [
-    key(0, 1), key(0.2167, 1), key(0.2333, 0, 'inOutSine'), key(0.7333, 0),
-    key(0.7667, 1, 'inOutSine'), key(1.5, 1),
+    key(0, 1), key(0.2, 1), key(0.2167, 0, 'inOutSine'), key(0.78, 0),
+    key(0.805, 1, 'inOutSine'), key(1.5, 1),
   ])),
 ]);

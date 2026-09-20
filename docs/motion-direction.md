@@ -31,10 +31,14 @@ inner openings remain transparent on colored backgrounds.
 | Frustration | Pinned ears and a restrained huff | `expr-angry` |
 | Sadness | Unequal soft sobs, falling tears, ear drag | `expr-cry` |
 | Alertness | One ear reacts before the other settles | `ear-twitch` |
+| Affection | Soften the eyes, lean into a slow blink, reopen before releasing the cuddle | `slow-blink` |
+| Drowsiness | Try to stay awake once, lose the fight, ear wakes first, innocent stare and a small blink | `sleepy` |
+| Quiet pride | Prepare, lift the chin into an eye-smile, savor it with a second tiny lift | `proud` |
+| Playful indifference | Look away, listening ear betrays interest, steal an asymmetric glance back | `feign-ignore` |
+| Amused suspicion | Watch the ring settle, look up, narrow the eyes at its second movement | `ring-side-eye` |
 
 A future greeting can use eye contact, a lean and an acknowledging nod. A future
-surprise can use an ear prick, a short recoil and a held wide-eyed look. A future
-sleepy performance can use progressively slower lids and a tucked head. These
+surprise can use an ear prick, a short recoil and a held wide-eyed look. These
 are design directions, not additional exported clips. Avoid invented tail
 flicks, paw waves, walk cycles, or disappearing through the ring: the source
 does not define the hidden anatomy those actions would expose.

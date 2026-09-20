@@ -14,8 +14,8 @@ export default clip('wink', { rig: 'pubnyan', duration: 0.95, fps: 60, loop: fal
       key(0.35, [0, 4]), key(0.57, [0, 0], 'inOutSine'), key(0.95, [0, 0]),
     ]),
   track('eye-r.pupil', 'opacity', [
-    key(0, 1), key(0.215, 1), key(0.23, 0, 'inOutSine'), key(0.35, 0),
-    key(0.365, 1, 'inOutSine'), key(0.95, 1),
+    key(0, 1), key(0.195, 1), key(0.21, 0, 'inOutSine'), key(0.405, 0),
+    key(0.445, 1, 'inOutSine'), key(0.95, 1),
   ]),
   track('head', 'rotation', [
     key(0, 0), key(0.1, 0.9, 'inOutCubic'), key(0.25, -4, 'outCubic'),

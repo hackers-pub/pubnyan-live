@@ -17,7 +17,8 @@ export function breath(duration: number, height = 0.008): Track[] {
 /** Fast closure, a readable closed hold, then a softer reopening.
  * Ease out of the closed hold instead of opening a quarter-eye in one frame.
  * Only the white aperture compresses. The unscaled black pupil merges into
- * the opaque black head outside it; conceal it only at the closed-lid seam.
+ * the opaque black head outside it. Conceal it through the narrowest portion
+ * of reopening so the pupil does not split the lid into two white corners.
  */
 export function blink(duration: number, start: number, side: 'both' | 'right' = 'both'): Track[] {
   const parts = side === 'right' ? ['eye-r.white', 'eye-r.pupil']
@@ -28,8 +29,8 @@ export function blink(duration: number, start: number, side: 'both' | 'right' = 
     key(start + 0.12, [1, 0.08]),
     key(start + 0.3, [1, 1], 'inOutSine'), key(duration, [1, 1]),
   ])), ...parts.filter((part) => part.endsWith('.pupil')).map((part) => track(part, 'opacity', [
-    key(0, 1), key(start, 1), key(start + 0.065, 1), key(start + 0.08, 0, 'inOutSine'),
-    key(start + 0.12, 0), key(start + 0.135, 1, 'inOutSine'), key(duration, 1),
+    key(0, 1), key(start, 1), key(start + 0.052, 1), key(start + 0.067, 0, 'inOutSine'),
+    key(start + 0.165, 0), key(start + 0.2, 1, 'inOutSine'), key(duration, 1),
   ]))];
 }
 
@@ -47,9 +48,9 @@ export function sourceEyeTransition(from: string, to: string): Track[] {
         key(1 / 3, [1, 1], 'inOutSine'), key(0.4, [1, 1])])]),
     ]),
     ...eyes.filter(part => part.endsWith('.pupil')).map(part => track(part, 'opacity', [
-      key(0, from === 'normal' ? 1 : 0), key(0.085, from === 'normal' ? 1 : 0),
-      key(0.1, 0, 'inOutSine'), key(0.15, 0),
-      key(1 / 6, to === 'normal' ? 1 : 0, 'inOutSine'), key(0.4, to === 'normal' ? 1 : 0),
+      key(0, from === 'normal' ? 1 : 0), key(0.075, from === 'normal' ? 1 : 0),
+      key(0.09, 0, 'inOutSine'), key(0.195, 0),
+      key(0.23, to === 'normal' ? 1 : 0, 'inOutSine'), key(0.4, to === 'normal' ? 1 : 0),
     ])),
   ];
 }

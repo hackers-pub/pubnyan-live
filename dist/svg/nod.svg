@@ -60,10 +60,10 @@
 @keyframes eye-l-pupil-o {
   0% { opacity: 1; }
   15.2941% { opacity: 1; }
-  22.9412% { opacity: 1; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
-  24.7059% { opacity: 0; }
-  29.4118% { opacity: 0; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
-  31.1765% { opacity: 1; }
+  21.4118% { opacity: 1; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
+  23.1765% { opacity: 0; }
+  34.7059% { opacity: 0; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
+  38.8235% { opacity: 1; }
   100% { opacity: 1; }
 }
 @keyframes eye-l-white-clip-t {
@@ -77,10 +77,10 @@
 @keyframes eye-r-pupil-o {
   0% { opacity: 1; }
   15.2941% { opacity: 1; }
-  22.9412% { opacity: 1; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
-  24.7059% { opacity: 0; }
-  29.4118% { opacity: 0; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
-  31.1765% { opacity: 1; }
+  21.4118% { opacity: 1; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
+  23.1765% { opacity: 0; }
+  34.7059% { opacity: 0; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
+  38.8235% { opacity: 1; }
   100% { opacity: 1; }
 }
 @keyframes eye-r-white-clip-t {

@@ -4,11 +4,17 @@ import { Renderer } from '../packages/render/src/renderer.ts';
 import { referenceFrame } from '../packages/verify/src/reference.ts';
 import { contactSheet } from '../packages/verify/src/contact-sheet.ts';
 import { TARGETS } from '../packages/verify/src/targets/index.ts';
+import { PNG } from 'pngjs';
 
 // Full verification sheets can exceed Chrome's 16,384px screenshot texture width.
 // Keep all four renderer rows, but curate eight poses including the exact endpoint.
 // This is visual review, not a replacement for npm run verify's exhaustive samples.
 const poses = {
+  'slow-blink': [0, 0.7, 1.12, 1.62, 1.95, 2.38, 2.85, 3.2],
+  sleepy: [0, 1.12, 1.4, 2.18, 2.43, 2.78, 3.82, 4.4],
+  proud: [0, 0.18, 0.85, 1.25, 1.85, 2.4, 3.1, 3.6],
+  'feign-ignore': [0, 0.35, 0.8, 1.24, 2.08, 2.56, 2.92, 3.8],
+  'ring-side-eye': [0, 0.8, 1.35, 2.4, 2.95, 3.65, 4.1, 4.8],
   idle: [0, 1.18, 1.68, 2.76, 3.23, 3.64, 4.25, 6],
   celebrate: [0, 1/6, 11/30, 29/60, 0.65, 0.85, 1.1, 1.5],
   'ring-wobble': [0, 0.18, 0.34, 0.58, 0.88, 1.04, 1.32, 1.8],
@@ -22,7 +28,15 @@ const poses = {
   'expr-curious': [0, 0.5, 1.08, 1.52, 2.56, 3.8, 4.5, 5.4],
   'expr-shy': [0, 0.49, 1.06, 2.76, 3.24, 3.83, 4.7, 5.6],
 };
-const names = process.argv.slice(2);
+const eyesOnly = process.argv.includes('--eyes');
+const eyePoses = {
+  'slow-blink': [0, .72, .98, 1.12, 1.62, 1.65, 1.94, 3.2],
+  sleepy: [0, 1.05, 1.78, 2.06, 2.18, 2.5, 3.82, 4.4],
+  proud: [0, .54, .675, .95, 2.35, 2.575, 2.625, 3.6],
+  'feign-ignore': [0, .9, 1.24, 2.12, 2.88, 2.92, 2.96, 3.8],
+  'ring-side-eye': [0, 1.35, 2.95, 3.65, 4.1, 4.14, 4.2, 4.8],
+};
+const names = process.argv.slice(2).filter(arg => arg !== '--eyes');
 for (const name of names) if (!clips.some(c => c.name === name)) throw new Error(`Unknown clip: ${name}`);
 const selected = clips.filter(c => c.rig === 'pubnyan' && (!names.length || names.includes(c.name)));
 const dir = new URL('../dist/verify/', import.meta.url);
@@ -31,7 +45,7 @@ const renderer = await Renderer.launch();
 try {
   for (const clip of selected) {
     const rig = getRig(clip.rig);
-    const times = (poses[clip.name] ?? Array.from({length:8}, (_, i) => clip.duration * i / 7))
+    const times = ((eyesOnly && eyePoses[clip.name]) || poses[clip.name] || Array.from({length:8}, (_, i) => clip.duration * i / 7))
       .map((t, i) => i === 7 ? clip.duration : Math.min(t, clip.duration));
     const reference = [];
     for (const t of times) reference.push(await referenceFrame(renderer, rig, clip, t));
@@ -45,7 +59,15 @@ try {
         : await target.renderFrame(renderer, rig, clip, t));
       rows.push({label: target.name, frames});
     }
-    await writeFile(new URL(`${clip.name}-review.png`, dir), await contactSheet(renderer, times.map(t => Number(t.toFixed(4))), rows));
+    if (eyesOnly) {
+      for (const row of rows) row.frames = row.frames.map(buffer => {
+        const source = PNG.sync.read(buffer);
+        const face = new PNG({width: 210, height: 100});
+        PNG.bitblt(source, face, 105, 70, 210, 100, 0, 0);
+        return PNG.sync.write(face);
+      });
+    }
+    await writeFile(new URL(`${clip.name}-${eyesOnly ? 'eyes' : 'review'}.png`, dir), await contactSheet(renderer, times.map(t => Number(t.toFixed(4))), rows));
     console.log(`${clip.name}: ${times.length} poses, reference + ${TARGETS.map(t => t.name).join('/')}`);
   }
 } finally { await renderer.close(); }

@@ -19,8 +19,10 @@ for (const from of expressions) {
         key(0.4, [1, 1], 'inOutSine'),
       ])),
       ...['eye-l.pupil', 'eye-r.pupil', 'mouth', 'tear-l', 'tear-r'].map(part => track(part, 'opacity', [
-        key(0, 1), key(1 / 15, 1), key(0.1, 0, 'inOutSine'), key(2 / 15, 0),
-        key(0.2, 1, 'inOutSine'), key(0.4, 1),
+        key(0, 1), key(part.endsWith('.pupil') ? .055 : 1 / 15, 1),
+        key(part.endsWith('.pupil') ? .075 : .1, 0, 'inOutSine'), key(2 / 15, 0),
+        ...(part.endsWith('.pupil') ? [key(.215, 0), key(.255, 1, 'inOutSine')] : [key(.2, 1, 'inOutSine')]),
+        key(0.4, 1),
       ])),
     ]);
   }

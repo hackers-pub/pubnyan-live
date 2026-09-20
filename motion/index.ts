@@ -18,6 +18,11 @@ import earTwitch from '#motion/clips/ear-twitch.clip.ts';
 import tailFlick from '#motion/clips/tail-flick.clip.ts';
 import ringWobble from '#motion/clips/ring-wobble.clip.ts';
 import celebrate from '#motion/clips/celebrate.clip.ts';
+import slowBlink from '#motion/clips/slow-blink.clip.ts';
+import sleepy from '#motion/clips/sleepy.clip.ts';
+import proud from '#motion/clips/proud.clip.ts';
+import feignIgnore from '#motion/clips/feign-ignore.clip.ts';
+import ringSideEye from '#motion/clips/ring-side-eye.clip.ts';
 import toAngry from '#motion/clips/to-angry.clip.ts';
 import fromAngry from '#motion/clips/from-angry.clip.ts';
 import toCurious from '#motion/clips/to-curious.clip.ts';
@@ -44,6 +49,11 @@ export const clips: Clip[] = [
   tailFlick,
   ringWobble,
   celebrate,
+  slowBlink,
+  sleepy,
+  proud,
+  feignIgnore,
+  ringSideEye,
   exprAngry,
   exprCurious,
   exprCry,

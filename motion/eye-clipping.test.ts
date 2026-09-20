@@ -22,6 +22,11 @@ test('all exporters clip real pupils on a contrasting face during eye interactio
       ['wink', [.19, .23, .3925]], ['idle', [3.2075, 3.2925]],
       ['celebrate', [.2333, .275, .65]], ['to-cry', [.0925, .1833]],
       ['from-cry', [.1583, .25]], ['expr-cry', [0]],
+      ['slow-blink', [.72, 1.05, 1.12, 1.64, 1.9]],
+      ['sleepy', [1.05, 2.08, 2.48, 2.5, 3.68, 3.74]],
+      ['proud', [.625, .675, .85, 2.575, 2.625]],
+      ['feign-ignore', [.9, 2.88, 2.94]],
+      ['ring-side-eye', [3.65, 4.1, 4.16]],
     ] as const) {
       const clip = {...clips.find(c => c.name === name)!, name: `fixture-colored-${name}`};
       generated.add(clip.name);
