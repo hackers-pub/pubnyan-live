@@ -24,18 +24,15 @@ function geometryMachine(): Machine {
   return result;
 }
 
-function withoutCelebration(): Machine {
+function withoutFullFacePerformances(): Machine {
   const result = geometryMachine();
-  for (const layer of Object.values(result.layers)) {
-    delete layer.states.celebrate;
-    layer.transitions = layer.transitions.filter(t => t.to !== 'celebrate');
-  }
+  delete result.layers.celebration;
   return result;
 }
 
-test('adding the happy reaction preserves angry and crying faces during a nod', async () => {
+test('adding full-face performances preserves angry and crying faces during a nod', async () => {
   const rig = getRig('pubnyan');
-  const before = exportRiveMachine(rig, clips, withoutCelebration());
+  const before = exportRiveMachine(rig, clips, withoutFullFacePerformances());
   const after = exportRiveMachine(rig, clips, geometryMachine());
   const renderer = await Renderer.launch();
   try {

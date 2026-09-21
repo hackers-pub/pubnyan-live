@@ -123,6 +123,7 @@ const REACTIONS = [
   { input: 'reactEarTwitch', label: 'Ears', key: '4', duration: 0.75 },
   { input: 'reactRingWobble', label: 'Ring', key: '5', duration: 1.8 },
   { input: 'reactCelebrate', label: 'Celebrate', key: '6', duration: 1.5 },
+  { input: 'reactSlowBlink', label: 'Slow blink', key: '7', duration: 3.2 },
 ];
 
 function setupStage() {

@@ -20,6 +20,7 @@ export default machine({
     reactTailFlick: { type: 'trigger' },
     reactRingWobble: { type: 'trigger' },
     reactCelebrate: { type: 'trigger' },
+    reactSlowBlink: { type: 'trigger' },
     loading: { type: 'bool', default: false },
   },
   layers: {
@@ -68,15 +69,17 @@ export default machine({
       ],
     },
     celebration: {
-      // Shape-authored performances are full facial overrides in the Rive
-      // exporter. Keep this separate so ordinary reactions preserve emotion.
+      // Shape-authored performances share one full-face override layer so they
+      // interrupt each other. Ordinary reactions keep their partial overlays.
       entry: 'none',
       states: {
         none: { clip: null, mode: 'once' },
         celebrate: { clip: 'celebrate', mode: 'once' },
+        'slow-blink': { clip: 'slow-blink', mode: 'once' },
       },
       transitions: [
         ...reactionTransitions('reactCelebrate', 'celebrate'),
+        ...reactionTransitions('reactSlowBlink', 'slow-blink'),
       ],
     },
   },

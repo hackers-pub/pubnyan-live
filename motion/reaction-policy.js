@@ -7,6 +7,7 @@ export const reactionExpressions = {
   reactRingWobble: ['normal', 'curious'],
   reactTailFlick: ['normal', 'curious'], // deprecated ring-wobble alias
   reactCelebrate: ['normal'],
+  reactSlowBlink: ['normal'],
 };
 
 export function canReact(expression, trigger) {

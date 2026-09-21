@@ -82,7 +82,7 @@ async function run(server) {
     }
 
     const permitted = {
-      normal: ['react', 'reactNod', 'reactTilt', 'reactEarTwitch', 'reactRingWobble', 'reactCelebrate'],
+      normal: ['react', 'reactNod', 'reactTilt', 'reactEarTwitch', 'reactRingWobble', 'reactCelebrate', 'reactSlowBlink'],
       angry: ['reactEarTwitch'],
       curious: ['reactNod', 'reactTilt', 'reactEarTwitch', 'reactRingWobble'],
       cry: ['reactEarTwitch'],
@@ -97,10 +97,33 @@ async function run(server) {
     await page.$eval('#stage', el => el.scrollIntoView({block: 'center'}));
     await page.keyboard.press('1');
     await page.keyboard.press('6');
+    await page.keyboard.press('7');
     await page.click('#stage-canvas');
     check('forbidden shortcuts and cat click give no reaction feedback', await page.$('#stage-reactions .is-firing') === null);
     await page.keyboard.press('4');
     check('allowed ear shortcut still fires', await page.$('#stage-reactions [data-reaction="reactEarTwitch"].is-firing') !== null);
+
+    // A reduced-motion request must play one complete slow blink, then rest.
+    // Compare rendered canvases so a button flash alone cannot pass this check.
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('#stage.is-live', { timeout: 20_000 });
+    await page.$eval('#stage', el => el.scrollIntoView({ block: 'center' }));
+    const canvasFrame = () => page.$eval('#stage-canvas', canvas => canvas.toDataURL());
+    for (const action of ['button', 'keyboard']) {
+      if (action === 'button') await page.click('#stage-reactions [data-reaction="reactSlowBlink"]');
+      else await page.keyboard.press('7');
+      await sleep(1200);
+      const closed = await canvasFrame();
+      if (SHOTS && action === 'button') await page.screenshot({ path: join(SHOTS, 'slow-blink-closed.png') });
+      await sleep(2400);
+      const resting = await canvasFrame();
+      await sleep(300);
+      check(`slow blink ${action} renders and rests with reduced motion`, closed !== resting && resting === await canvasFrame());
+    }
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'no-preference' }]);
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('#stage.is-live', { timeout: 20_000 });
 
     await page.click('#stage-expressions [data-expression="shy"]');
     await page.click('#stage-reactions [data-reaction="reactNod"]');
