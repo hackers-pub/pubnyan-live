@@ -122,6 +122,14 @@
       "file": "ring-side-eye.svg"
     },
     {
+      "name": "startle-check",
+      "rig": "pubnyan",
+      "duration": 3.6,
+      "fps": 60,
+      "loop": false,
+      "file": "startle-check.svg"
+    },
+    {
       "name": "expr-angry",
       "rig": "pubnyan",
       "duration": 4.6,
