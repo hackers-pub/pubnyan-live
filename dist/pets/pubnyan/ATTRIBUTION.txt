@@ -1,0 +1,3 @@
+pubnyan, the Hackers' Pub mascot, by Bak Eunji. CC BY-SA 4.0. https://github.com/hackers-pub/visual-identity
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Adaptation: sampled vector motion, two directional glide clips, scaled and packed into a Codex pet atlas.
