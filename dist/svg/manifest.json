@@ -130,6 +130,14 @@
       "file": "startle-check.svg"
     },
     {
+      "name": "gentle-no",
+      "rig": "pubnyan",
+      "duration": 3.2,
+      "fps": 60,
+      "loop": false,
+      "file": "gentle-no.svg"
+    },
+    {
       "name": "expr-angry",
       "rig": "pubnyan",
       "duration": 4.6,

@@ -255,13 +255,29 @@
         },
         "drowsy": {
           "file": "pubnyan-normal-transparent.svg",
-          "map": { "nose": "path23", "eye-l.white": "path11#outer", "eye-r.white": "path9#outer" },
-          "overrides": { "nose": "normal-nose-aligned", "eye-l.white": "eye-l-drowsy", "eye-r.white": "eye-r-drowsy" }
+          "map": {
+            "nose": "path23",
+            "eye-l.white": "path11#outer",
+            "eye-r.white": "path9#outer"
+          },
+          "overrides": {
+            "nose": "normal-nose-aligned",
+            "eye-l.white": "eye-l-drowsy",
+            "eye-r.white": "eye-r-drowsy"
+          }
         },
         "resting-eyes": {
           "file": "pubnyan-normal-transparent.svg",
-          "map": { "nose": "path23", "eye-l.white": "path11#outer", "eye-r.white": "path9#outer" },
-          "overrides": { "nose": "normal-nose-aligned", "eye-l.white": "eye-l-resting", "eye-r.white": "eye-r-resting" }
+          "map": {
+            "nose": "path23",
+            "eye-l.white": "path11#outer",
+            "eye-r.white": "path9#outer"
+          },
+          "overrides": {
+            "nose": "normal-nose-aligned",
+            "eye-l.white": "eye-l-resting",
+            "eye-r.white": "eye-r-resting"
+          }
         },
         "closed": {
           "file": "pubnyan-normal-transparent.svg",
@@ -277,6 +293,198 @@
           },
           "overrides": {
             "nose": "normal-nose-aligned"
+          }
+        },
+        "no-natural-m0p28": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m0p28-head",
+            "ear-l": "no-natural-m0p28-ear-l",
+            "ear-r": "no-natural-m0p28-ear-r",
+            "face": "no-natural-m0p28-face",
+            "nose": "no-natural-m0p28-nose",
+            "mouth": "no-natural-m0p28-mouth",
+            "eye-l.white": "no-natural-m0p28-eye-l-white",
+            "eye-r.white": "no-natural-m0p28-eye-r-white"
+          }
+        },
+        "no-natural-m1": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m1-head",
+            "ear-l": "no-natural-m1-ear-l",
+            "ear-r": "no-natural-m1-ear-r",
+            "face": "no-natural-m1-face",
+            "nose": "no-natural-m1-nose",
+            "mouth": "no-natural-m1-mouth",
+            "eye-l.white": "no-natural-m1-eye-l-white",
+            "eye-r.white": "no-natural-m1-eye-r-white"
+          }
+        },
+        "no-natural-m0p5": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m0p5-head",
+            "ear-l": "no-natural-m0p5-ear-l",
+            "ear-r": "no-natural-m0p5-ear-r",
+            "face": "no-natural-m0p5-face",
+            "nose": "no-natural-m0p5-nose",
+            "mouth": "no-natural-m0p5-mouth",
+            "eye-l.white": "no-natural-m0p5-eye-l-white",
+            "eye-r.white": "no-natural-m0p5-eye-r-white"
+          }
+        },
+        "no-natural-m0p2": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m0p2-head",
+            "ear-l": "no-natural-m0p2-ear-l",
+            "ear-r": "no-natural-m0p2-ear-r",
+            "face": "no-natural-m0p2-face",
+            "nose": "no-natural-m0p2-nose",
+            "mouth": "no-natural-m0p2-mouth",
+            "eye-l.white": "no-natural-m0p2-eye-l-white",
+            "eye-r.white": "no-natural-m0p2-eye-r-white"
+          }
+        },
+        "no-natural-0p2": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-0p2-head",
+            "ear-l": "no-natural-0p2-ear-l",
+            "ear-r": "no-natural-0p2-ear-r",
+            "face": "no-natural-0p2-face",
+            "nose": "no-natural-0p2-nose",
+            "mouth": "no-natural-0p2-mouth",
+            "eye-l.white": "no-natural-0p2-eye-l-white",
+            "eye-r.white": "no-natural-0p2-eye-r-white"
+          }
+        },
+        "no-natural-0p5": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-0p5-head",
+            "ear-l": "no-natural-0p5-ear-l",
+            "ear-r": "no-natural-0p5-ear-r",
+            "face": "no-natural-0p5-face",
+            "nose": "no-natural-0p5-nose",
+            "mouth": "no-natural-0p5-mouth",
+            "eye-l.white": "no-natural-0p5-eye-l-white",
+            "eye-r.white": "no-natural-0p5-eye-r-white"
+          }
+        },
+        "no-natural-0p86": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-0p86-head",
+            "ear-l": "no-natural-0p86-ear-l",
+            "ear-r": "no-natural-0p86-ear-r",
+            "face": "no-natural-0p86-face",
+            "nose": "no-natural-0p86-nose",
+            "mouth": "no-natural-0p86-mouth",
+            "eye-l.white": "no-natural-0p86-eye-l-white",
+            "eye-r.white": "no-natural-0p86-eye-r-white"
+          }
+        },
+        "no-natural-0p43": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-0p43-head",
+            "ear-l": "no-natural-0p43-ear-l",
+            "ear-r": "no-natural-0p43-ear-r",
+            "face": "no-natural-0p43-face",
+            "nose": "no-natural-0p43-nose",
+            "mouth": "no-natural-0p43-mouth",
+            "eye-l.white": "no-natural-0p43-eye-l-white",
+            "eye-r.white": "no-natural-0p43-eye-r-white"
+          }
+        },
+        "no-natural-0p15": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-0p15-head",
+            "ear-l": "no-natural-0p15-ear-l",
+            "ear-r": "no-natural-0p15-ear-r",
+            "face": "no-natural-0p15-face",
+            "nose": "no-natural-0p15-nose",
+            "mouth": "no-natural-0p15-mouth",
+            "eye-l.white": "no-natural-0p15-eye-l-white",
+            "eye-r.white": "no-natural-0p15-eye-r-white"
+          }
+        },
+        "no-natural-m0p15": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m0p15-head",
+            "ear-l": "no-natural-m0p15-ear-l",
+            "ear-r": "no-natural-m0p15-ear-r",
+            "face": "no-natural-m0p15-face",
+            "nose": "no-natural-m0p15-nose",
+            "mouth": "no-natural-m0p15-mouth",
+            "eye-l.white": "no-natural-m0p15-eye-l-white",
+            "eye-r.white": "no-natural-m0p15-eye-r-white"
+          }
+        },
+        "no-natural-m0p42": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-m0p42-head",
+            "ear-l": "no-natural-m0p42-ear-l",
+            "ear-r": "no-natural-m0p42-ear-r",
+            "face": "no-natural-m0p42-face",
+            "nose": "no-natural-m0p42-nose",
+            "mouth": "no-natural-m0p42-mouth",
+            "eye-l.white": "no-natural-m0p42-eye-l-white",
+            "eye-r.white": "no-natural-m0p42-eye-r-white"
+          }
+        },
+        "no-natural-1": {
+          "file": "pubnyan-normal-transparent.svg",
+          "map": {
+            "nose": "path23"
+          },
+          "overrides": {
+            "head": "no-natural-1-head",
+            "ear-l": "no-natural-1-ear-l",
+            "ear-r": "no-natural-1-ear-r",
+            "face": "no-natural-1-face",
+            "nose": "no-natural-1-nose",
+            "mouth": "no-natural-1-mouth",
+            "eye-l.white": "no-natural-1-eye-l-white",
+            "eye-r.white": "no-natural-1-eye-r-white"
           }
         }
       }

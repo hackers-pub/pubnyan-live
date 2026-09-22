@@ -24,6 +24,7 @@ import proud from '#motion/clips/proud.clip.ts';
 import feignIgnore from '#motion/clips/feign-ignore.clip.ts';
 import ringSideEye from '#motion/clips/ring-side-eye.clip.ts';
 import startleCheck from '#motion/clips/startle-check.clip.ts';
+import gentleNo from '#motion/clips/gentle-no.clip.ts';
 import toAngry from '#motion/clips/to-angry.clip.ts';
 import fromAngry from '#motion/clips/from-angry.clip.ts';
 import toCurious from '#motion/clips/to-curious.clip.ts';
@@ -56,6 +57,7 @@ export const clips: Clip[] = [
   feignIgnore,
   ringSideEye,
   startleCheck,
+  gentleNo,
   exprAngry,
   exprCurious,
   exprCry,
