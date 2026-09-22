@@ -5,7 +5,12 @@ rendering, and visual comparison; it is not a release procedure.
 
 ## Find the acting problem
 
-Watch the current performance at normal speed before reading every keyframe.
+For open-ended work, first choose an improvement or a new performance using
+[autonomous discovery](discovery.md). Existing clips are references and a
+repertoire to extend, not a closed list of permitted ideas.
+
+Watch the current performance, or the nearest reference for a new clip, at
+normal speed before reading every keyframe.
 Name a visible problem and the moment where it occurs: an unclear thought,
 a mechanical recovery, a pose that loses its emotion, or an eye artifact.
 Then inspect the tracks responsible for that moment.
@@ -42,8 +47,13 @@ record a concrete limitation rather than expanding into `packages/` work.
 Before editing, preserve a current SVG or rendered video in a fresh directory
 under `dist/verify/` or a temporary directory. If existing exports are stale, render
 from the current source first. Never label a candidate rendering as its baseline.
+For a new clip, label the neutral pose and nearest existing performance as
+references rather than "before." Preserve the first actual draft for later revisions.
 
-Export only the selected clips from `motion/index.ts` with the existing exporters.
+Export only the selected clips with the existing exporters. A new draft can be
+imported directly from its clip module for a standalone preview; the parent adds
+an accepted candidate to `motion/index.ts` before registered-clip checks/exports.
+Registration does not authorize new machine inputs or UI controls.
 Save final clip outputs in their normal `dist/` locations, and comparison material
 under `dist/verify/`. Do not regenerate the whole site or every clip for a timing edit.
 
@@ -111,6 +121,9 @@ choices or literal keyframe times. Do not run Git/agent-loop tests. Expand visua
 coverage to dependent clips if shared eye geometry changes, not automatically to
 unrelated code. An animation comparison failure deserves investigation in the
 changed motion or drawing; an unrelated infrastructure failure does not.
+For a new clip, check which existing checks actually exercise it; a name filter
+that matches no tests is not verification. Use clip validation and affected-clip
+render parity, plus applicable existing motion/eye invariants.
 
 ## Judge the render
 
@@ -131,6 +144,8 @@ provide explicit playback controls.
 Lead with the change in performance, followed by a link to the playable before/after
 comparison. Label the versions clearly, such as left = before, right = after. Mention
 focused checks briefly and accurately; do not call them a full release validation.
+For new work, lead with the new emotional thought/gesture and its preview, then
+name the nearest reference and what visibly distinguishes it.
 
 A concise note contains `clip`, `actingIntent`, `before`, `after`, `observations`,
 and `nextArtisticStep`. For pending or completed verification, add candidate/input

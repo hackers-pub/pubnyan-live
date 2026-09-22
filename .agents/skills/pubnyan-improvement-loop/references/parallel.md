@@ -5,14 +5,35 @@ feedback loop short while stable candidates receive thorough verification.
 
 ## Assign work by dependency
 
-The parent sets a short common direction and dispatches independent clips with:
+The parent discovers/selects candidates and keeps the compact project direction
+and iteration ledger. Each new candidate/iteration gets a fresh author with
+`fork_turns: "none"` in Codex, not a full-history fork or a follow-up to a completed
+author. Refining the same candidate within its current iteration may stay with
+that author. Start a fresh verifier per stable batch too; let a running verifier
+finish rather than restarting it merely because authoring advanced.
 
-- Clip name, acting beats, permitted source files, and protected shared files.
-- An immutable before render and a unique candidate artifact directory, such as
+The parent has useful work alongside an author: review returned evidence, select
+the next candidate, coordinate shared dependencies, or monitor verification.
+The parent's context is not reset by spawning a fresh child. Durable notes hold
+decisions; do not accumulate full worker transcripts or build logs in handoffs.
+
+Dispatch independent clips with a self-contained brief containing:
+
+- New/existing clip name, intended emotional thought, acting beats, nearest
+  existing performance and the intended visible difference.
+- Exact permitted source files, protected shared files, and paths to `AGENTS.md`,
+  this skill, acting direction and eye guidance for the child to read itself.
+- An immutable before render (or labeled new-clip references), recent relevant
+  observations/rejected approaches, and a unique candidate artifact directory, such as
   `dist/verify/drafts/proud-v2/` (use a fresh unused directory for each candidate).
 - Required return: changed paths, playable comparison, visual observations,
   input identity, and verification status. A subagent must not claim visual
   review from numerical parity alone.
+
+The handoff must include applicable user constraints and the current stop
+condition; fresh context must not erase them. Return a compact result to the
+parent, then end the author task. The next iteration uses that result and
+current files, not the prior conversation history.
 
 One author owns each clip. Two authors may work on `proud` and `sleepy` in
 parallel if they only change their assigned clip files. The parent owns

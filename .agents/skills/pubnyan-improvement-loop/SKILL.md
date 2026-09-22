@@ -1,12 +1,13 @@
 ---
 name: pubnyan-improvement-loop
-description: Use when improving Pubnyan's character animation, emotional acting, poses, timing, or eye motion through visual review. Not for repository maintenance, application wiring, or verification-performance work.
+description: Use when discovering, creating, or improving Pubnyan's emotions, gestures, character animations, poses, timing, or eye motion through visual review. Not for repository maintenance, application wiring, or verification-performance work.
 ---
 
 # Pubnyan animator loop
 
 Work as a character animator. The deliverable is a more readable, appealing
-performance with rendered before/after evidence. A commit, a green repository
+performance with playable evidence: before/after for existing clips, a clearly
+labeled new performance and reference pose for new clips. A commit, a green repository
 suite, or a new UI button is not an animation improvement.
 
 ## Start with the performance
@@ -15,7 +16,8 @@ Read repository `AGENTS.md` for asset protections, then
 [the animator reference](references/cycle.md). Use `docs/motion-direction.md`
 and `docs/visual-eye-review.md` for the character's acting and eye construction.
 Inspect the requested clip in `motion/index.ts` and `motion/clips/`. If no clip
-is specified, watch a few relevant performances and choose one visible weakness.
+is specified, watch a few relevant performances and choose either a visible
+weakness to improve or a missing emotion/gesture to explore.
 Do not require a full-library audit before making the first useful improvement.
 
 Describe the intended acting in a few beats: what the cat notices or feels,
@@ -23,12 +25,28 @@ its preparation, accent, hold, and recovery. Choose reasonable details and
 start within the user's request; ask only when a missing artistic preference
 would materially change the result.
 
+## Discover, create, select
+
+Read [autonomous discovery](references/discovery.md) when choosing what to make.
+Generate two or three grounded candidates from the current repertoire and recent
+review notes. Include a new emotion or gesture when exploration is requested.
+Select the most promising candidate yourself and build a small playable draft;
+do not stop at an idea list or ask the user to choose every clip.
+
+Choose between improving an existing performance and adding a distinct one.
+Judge the thought, silhouette, timing and character fit in motion, then keep,
+revise, or reject the candidate with evidence. Novelty is useful only when the
+performance reads differently from its nearest existing clip. A new emotion
+here is a standalone performance, not a new application emotion state.
+
 ## Draft first, verify separately
 
-1. Preserve an actual before rendering before editing.
-2. Make one coherent acting change: timing, easing, anticipation, gaze,
+1. Preserve an actual before rendering for an existing clip. For a new clip,
+   preserve a neutral/reference pose and the nearest existing performance as
+   references; never invent a "before" version of a nonexistent animation.
+2. Author one coherent performance or acting change: timing, easing, anticipation, gaze,
    overlapping motion, pose, or expression. Start in `motion/clips/`.
-3. Watch before/after at normal speed and scrub the critical moments. Inspect
+3. Watch the new performance or before/after at normal speed and scrub the critical moments. Inspect
    eyes close up and the whole character at avatar size. Revise until the
    improvement reads in motion, not just in a still or a numerical report.
 4. Share the playable SVG/reference draft and acting direction as soon as they
@@ -48,11 +66,17 @@ flattening the pupils. Keep the ring rigid and the star muzzle readable.
 
 ## Parallel work
 
-For multiple independent clips, use subagents with one owner per clip and a
-shared acting direction. The parent coordinates integration and reviews the
-combined result. For one clip, keep authoring local; a verifier can work alongside
-the author only on a stable snapshot. Use a small worker pool so Chrome renders
-do not crowd out interactive review.
+The parent owns direction, candidate selection, scheduling, integration and
+review. When subagents are available, start a fresh author for each selected
+candidate/iteration, including a single-clip iteration, with no inherited chat
+history (`fork_turns: "none"` in Codex). Hand over only the compact brief and
+evidence described in the parallel reference. Do not reuse a completed author
+for the next iteration. Without subagents, follow the same brief locally and
+state that context isolation was unavailable.
+
+Independent clips may have parallel authors, one owner per clip. A verifier can
+work alongside an author only on a stable snapshot. Use a small worker pool so
+Chrome renders do not crowd out interactive review.
 
 Before dispatching or starting background verification, read
 [parallel authoring and verification](references/parallel.md). Assign source and
@@ -81,10 +105,12 @@ relax the commit gate or authorize manual check-cache updates to claim a pass.
 
 ## Continue without operational detours
 
-A bare invocation means one useful visual iteration. Repeat when the user asks
-for continued iterations, selecting the next change from observed acting or
-rendering problems. If no further worthwhile change is evident, deliver the current
-result for artistic feedback. Respect user stops and host limits. Background
+A bare invocation means one useful discovery-and-draft iteration. Repeat when
+the user asks for continued iterations, using observed weaknesses and missing
+performances to select the next candidate. Before concluding that nothing useful
+remains, consider both improvement and repertoire expansion. If neither yields
+a worthwhile candidate, deliver the evidence and stop; do not manufacture novelty.
+Respect the user's batch/goal stopping condition and host limits. Background
 means an actually launched, tracked job; report queued, running, passed, failed,
 or stale accurately. Do not promise that a job survives the turn unless the
 host supports that lifecycle. Preserve a resumable pending note when it does not.
