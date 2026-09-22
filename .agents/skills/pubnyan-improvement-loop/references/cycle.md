@@ -65,9 +65,19 @@ when available. Existing local renderers and image viewing are also useful. Do n
 make OS accessibility permissions or a particular browser connector a prerequisite
 when another visual-review path works.
 
-## Check what changed
+## Check a stable candidate
 
-For a selected clip, use the existing `verifyClips` API to render reference/SVG/
+Use selected-clip SVG/reference playback for the first acting review. The
+multi-target contact helpers above belong to the verification pass, not every
+draft tweak. Deliver early comparisons with verification explicitly pending.
+
+When the direction is stable, run this pass as a tracked background job while
+independent authoring continues. For several candidates, pass them together to
+`verifyClips`; use one verification queue rather than a Chrome pool per author.
+Follow [parallel.md](parallel.md) for ownership, immutable inputs, and stale
+results. Changing `outputDir` alone does not isolate all existing renderer writes.
+
+For a selected stable clip, use the existing `verifyClips` API to render reference/SVG/
 Lottie/Rive and produce its verifier contact sheet. For example:
 
 ```sh
@@ -86,7 +96,9 @@ JS
 
 Choose the actual affected clip, not always `sleepy`. Keep the existing sample
 policy and thresholds. Do not invent unsupported CLI flags or weaken a failing
-comparison. Avoid concurrent exporters that write the same files.
+comparison. Avoid concurrent exporters that write the same files. Generate
+videos and shared bundles after the chosen batch settles, or when requested as
+the review artifact; do not encode every intermediate draft.
 
 Run existing focused checks when they cover the edit, for example:
 
@@ -120,7 +132,9 @@ Lead with the change in performance, followed by a link to the playable before/a
 comparison. Label the versions clearly, such as left = before, right = after. Mention
 focused checks briefly and accurately; do not call them a full release validation.
 
-A concise note may contain `clip`, `actingIntent`, `before`, `after`, `observations`,
-`checks`, and `nextArtisticStep`. No SHA, signing state, benchmark, commit, or page
-integration milestone is needed. Preserve other work in the checkout. A successful
-iteration ends with a visually reviewed animation draft, not a Git operation.
+A concise note contains `clip`, `actingIntent`, `before`, `after`, `observations`,
+and `nextArtisticStep`. For pending or completed verification, add candidate/input
+identity, check status, job/session ID when running, log/report paths, and the
+command needed to resume. Separate visual review from numerical parity; neither
+implies the other. No Git or page-integration milestone is needed for an animation
+draft. Preserve other work in the checkout.
