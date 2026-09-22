@@ -7,7 +7,8 @@
 //   /_storybook/     → the Storybook build from dist/storybook (when present)
 // Run `npm run storybook:build` first (with STORYBOOK_BASE=<pages base>/_storybook/) so the
 // Storybook build resolves its own chunks under the subpath.
-import { cp, mkdir, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -39,6 +40,22 @@ for (const pose of ['normal', 'angry', 'curious', 'cry', 'shy', 'happy']) {
   if (await exists(src)) await cp(src, join(OUT, 'assets', 'still', `${pose}.svg`));
 }
 console.log('copied rig/preview/pubnyan-*.svg -> dist/site/assets/still/');
+
+// Ship the committed pet package; do not rerender motion to build a download.
+const petSource = join(ROOT, 'dist', 'pets', 'pubnyan');
+const pet = JSON.parse(await readFile(join(petSource, 'pet.json'), 'utf8'));
+if (pet.spriteVersionNumber !== 2 || pet.spritesheetPath !== 'spritesheet.webp') {
+  throw new Error('The landing page requires the committed Pubnyan v2 package');
+}
+await mkdir(join(OUT, 'assets', 'pets', 'pubnyan'), { recursive: true });
+const petFiles = ['pet.json', 'spritesheet.webp', 'ATTRIBUTION.txt'];
+for (const file of petFiles) await cp(join(petSource, file), join(OUT, 'assets', 'pets', 'pubnyan', file));
+await mkdir(join(OUT, 'downloads'), { recursive: true });
+// Use a standard ZIP writer with CRCs so Finder and File Explorer can extract it.
+execFileSync('zip', ['-X', '-q', join(OUT, 'downloads', 'pubnyan-pet.zip'), ...petFiles.map(file => `pubnyan/${file}`)], {
+  cwd: join(OUT, 'assets', 'pets'),
+});
+console.log('packaged Pubnyan v2 -> dist/site/downloads/pubnyan-pet.zip');
 
 const vendor = [
   ['node_modules/@rive-app/canvas/rive.js', 'vendor/rive.js'],

@@ -2,6 +2,14 @@
 
 Animations of pubnyan, the [Hackers' Pub](https://hackers.pub/) mascot, defined once in a small motion DSL and exported to animated SVG, Lottie, Rive, and video.
 
+## Use pubnyan as a desktop pet
+
+The landing page's **Get the pet** section provides a ZIP download and installation
+steps for the ChatGPT desktop app. Extract the `pubnyan` folder into
+`${CODEX_HOME:-$HOME/.codex}/pets/`, then choose **Settings → Pets → Refresh → Pubnyan**.
+Enter `/pet` to show it. See the [pet build and installation notes](docs/codex-pet.md)
+and [official pet guide](https://learn.chatgpt.com/docs/pets).
+
 ## Layout
 
 - `vendor/visual-identity/` — the source artwork (git submodule).
@@ -53,8 +61,15 @@ See [the investigation and measurements](docs/check-performance.md).
 - `/` — the landing page from `site/` (plain HTML/CSS/JS; the Rive and Lottie runtimes are copied from `node_modules`).
 - `/_storybook/` — the Storybook build.
 - `/assets/{svg,lottie,rive,video}/` — the exported clips, `/assets/still/` — the resting poses from `rig/preview/`.
+- `/downloads/pubnyan-pet.zip` — the committed v2 pet package, with its three files inside a `pubnyan/` folder.
 
 `npm run site:build` assembles all of it in `dist/site` (`scripts/site-build.mjs`; set `STORYBOOK_BASE` to `<pages base>/_storybook/` so the Storybook chunks resolve under the subpath). `npm run site:smoke` serves `dist/site` and checks the landing page and the Storybook subpath in headless Chrome; add `--shots <dir>` for screenshots. One-time setup: in the repository settings, under **Settings → Pages**, set **Source** to **GitHub Actions**.
+
+The download is assembled with the system `zip` command; Pages CI installs it.
+For landing-page-only edits, reuse existing exports with `node scripts/site-build.mjs`
+instead of rerendering animations. Run `npm run site:smoke -- --pet-only` to check
+the guide, ZIP contents, relative download URLs, and narrow layouts. These checks
+use `unzip` as well as Chrome.
 
 ## Output notes
 

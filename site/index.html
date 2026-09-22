@@ -37,6 +37,7 @@
       <span>pubnyan<em>live</em></span>
     </a>
     <nav class="top__nav" aria-label="Site">
+      <a href="#pet">Get the pet</a>
       <a href="#stage-section">Stage</a>
       <a href="#gallery">Clips</a>
       <a href="#formats">Formats</a>
@@ -62,6 +63,7 @@
         </p>
         <div class="actions">
           <button id="hero-hello" type="button" class="button button--primary">Say hello</button>
+          <a class="button" href="#pet">Use as a pet</a>
           <a class="button" href="#stage-section">Give pubnyan a thought</a>
           <a class="button button--ghost" href="./_storybook/">Open the Storybook</a>
         </div>
@@ -76,6 +78,49 @@
         <img id="hero-cat" src="./assets/svg/idle.svg" alt="pubnyan, listening" width="406" height="351" decoding="async" fetchpriority="high">
         <figcaption><code>dist/svg/idle.svg</code> · animated SVG in an <code>&lt;img&gt;</code></figcaption>
       </figure>
+    </section>
+
+    <!-- Desktop pet ------------------------------------------------------------ -->
+    <section id="pet" class="section" aria-labelledby="pet-title">
+      <div class="section__head">
+        <p class="eyebrow">Your desktop companion</p>
+        <h2 id="pet-title">Take pubnyan with you.</h2>
+        <p class="section__lede">Bring the same quiet cat into the ChatGPT desktop app, with nine everyday motions and sixteen directions to look around. Download once, then choose pubnyan in the app.</p>
+      </div>
+      <div class="pet">
+        <div class="pet__download">
+          <figure class="pet__portrait surface">
+            <div class="pet__sprite" role="img" aria-label="Pubnyan, the black cat with a white star muzzle and an orbital ring"></div>
+            <figcaption>A little company while you work.</figcaption>
+          </figure>
+          <a class="button button--primary" href="./downloads/pubnyan-pet.zip" download="pubnyan-pet.zip">Download pubnyan</a>
+          <p class="pet__note">Free · ZIP · for the desktop app<br>Artwork by Bak Eunji · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+        </div>
+        <div>
+          <ol class="pet__steps">
+            <li>
+              <h3>Unzip the download</h3>
+              <p>Keep the <code>pubnyan</code> folder together. It contains <code>pet.json</code>, <code>spritesheet.webp</code>, and the artwork credit.</p>
+            </li>
+            <li>
+              <h3>Put it in your pets folder</h3>
+              <p>On macOS, open Finder, press <kbd>⇧⌘G</kbd> (Go to Folder), and enter the path below. Create the <code>pets</code> folder if it does not exist, then move <code>pubnyan</code> into it.</p>
+              <p class="pet__path"><code>~/.codex/pets/</code></p>
+              <details class="pet__platforms">
+                <summary>Windows or a custom storage location</summary>
+                <p>On Windows, enter <code>%USERPROFILE%\.codex\pets</code> in File Explorer. If you set <code>CODEX_HOME</code>, use the <code>pets</code> folder inside that location instead.</p>
+              </details>
+              <p class="pet__note">You should end up with <code>pets/pubnyan/pet.json</code>, with the spritesheet next to it. Already have pubnyan? Save a copy of your old folder before replacing it.</p>
+            </li>
+            <li>
+              <h3>Choose pubnyan in the app</h3>
+              <p>Open <strong>Settings → Pets</strong> in the ChatGPT desktop app. Select <strong>Refresh</strong>, then <strong>Pubnyan</strong>. Enter <code>/pet</code> or choose <strong>Show pet</strong> from the command menu to bring it onto your desktop.</p>
+            </li>
+          </ol>
+          <p class="pet__help">No Pets menu? Update the desktop app and check whether your workspace allows pets. <a href="https://learn.chatgpt.com/docs/pets">Read the official pet guide ↗</a></p>
+          <p class="pet__note">Desktop pets are stored on your computer; they do not automatically sync to ChatGPT on the web.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Stage ------------------------------------------------------------------ -->

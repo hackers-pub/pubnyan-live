@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 26 }
       - run: npm ci
-      - run: sudo apt-get install -y ffmpeg webp
+      - run: sudo apt-get install -y ffmpeg webp zip
       - run: npm run rig:extract
       # Landing page at the site root, Storybook under /_storybook/ (see scripts/site-build.mjs).
       - run: npm run site:build

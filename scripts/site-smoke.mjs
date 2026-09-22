@@ -2,7 +2,8 @@
 // Serves dist/site (built by `npm run site:build`) and checks the landing page in headless
 // Chrome: no console errors, the Rive stage goes live, the gallery lists every clip, each
 // format tab renders, and /_storybook/ answers. `--shots <dir>` also writes screenshots.
-import { createReadStream, existsSync, mkdirSync } from 'node:fs';
+import { createReadStream, existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import http from 'node:http';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,18 +14,21 @@ const SITE_DIR = join(ROOT, 'dist', 'site');
 const PORT = 6009;
 const shotsFlag = process.argv.indexOf('--shots');
 const SHOTS = shotsFlag >= 0 ? process.argv[shotsFlag + 1] : null;
+const PET_ONLY = process.argv.includes('--pet-only');
 
 const MIME_TYPES = {
   '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json',
   '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2',
   '.wasm': 'application/wasm', '.mp4': 'video/mp4', '.webp': 'image/webp', '.gif': 'image/gif',
-  '.riv': 'application/octet-stream', '.lottie': 'application/zip',
+  '.riv': 'application/octet-stream', '.lottie': 'application/zip', '.zip': 'application/zip',
 };
 
 function serve() {
   return http.createServer((req, res) => {
     const url = new URL(req.url ?? '/', 'http://localhost');
     let path = normalize(decodeURIComponent(url.pathname));
+    // Exercise the same relative URLs at a GitHub Pages repository subpath.
+    if (path.startsWith('/pubnyan-live/')) path = path.slice('/pubnyan-live'.length);
     if (path.endsWith('/')) path += 'index.html';
     const filePath = join(SITE_DIR, path);
     if (!filePath.startsWith(SITE_DIR) || !existsSync(filePath)) {
@@ -68,6 +72,44 @@ async function run(server) {
     check('gallery specimens', specimens >= 20, `${specimens} clips`);
     const heroSrc = await page.$eval('#hero-cat', (img) => img.getAttribute('src'));
     check('hero idle svg', heroSrc.endsWith('idle.svg'), heroSrc);
+
+    check('pet installation steps', await page.$$eval('#pet .pet__steps > li', els => els.length) === 3);
+    check('pet entry point in hero', await page.$('.hero a[href="#pet"]') !== null);
+    check('official pet guide', await page.$('#pet a[href="https://learn.chatgpt.com/docs/pets"]') !== null);
+    const archive = join(SITE_DIR, 'downloads', 'pubnyan-pet.zip');
+    execFileSync('unzip', ['-t', archive]);
+    const entries = execFileSync('unzip', ['-Z1', archive], {encoding:'utf8'}).trim().split('\n').sort();
+    const petFiles = ['ATTRIBUTION.txt', 'pet.json', 'spritesheet.webp'];
+    check('pet ZIP has exactly the three install files', JSON.stringify(entries) === JSON.stringify(petFiles.map(f => `pubnyan/${f}`).sort()));
+    for (const file of petFiles) {
+      const packed = execFileSync('unzip', ['-p', archive, `pubnyan/${file}`]);
+      check(`pet ZIP preserves ${file}`, packed.equals(readFileSync(join(ROOT, 'dist', 'pets', 'pubnyan', file))));
+    }
+    const petManifest = JSON.parse(execFileSync('unzip', ['-p', archive, 'pubnyan/pet.json'], {encoding:'utf8'}));
+    check('downloaded pet is v2', petManifest.spriteVersionNumber === 2 && petManifest.spritesheetPath === 'spritesheet.webp');
+    await page.goto(`http://localhost:${PORT}/pubnyan-live/#pet`, {waitUntil:'networkidle0'});
+    const downloadURL = await page.$eval('#pet a[download]', a => a.href);
+    const download = await fetch(downloadURL);
+    check('pet download works under Pages subpath', downloadURL === `http://localhost:${PORT}/pubnyan-live/downloads/pubnyan-pet.zip` && download.ok && Buffer.from(await download.arrayBuffer()).equals(readFileSync(archive)));
+    await page.$eval('#pet', el => el.scrollIntoView({block:'start',behavior:'instant'}));
+    if (SHOTS) {
+      mkdirSync(SHOTS, {recursive:true});
+      await page.screenshot({path:join(SHOTS,'pet-desktop.png')});
+    }
+    for (const width of [390, 320]) {
+      await page.setViewport({width,height:844,deviceScaleFactor:1});
+      await page.$eval('#pet', el => el.scrollIntoView({block:'start',behavior:'instant'}));
+      check(`pet guide fits ${width}px`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      check(`pet navigation visible at ${width}px`, await page.$eval('.top__nav a[href="#pet"]', a => a.getBoundingClientRect().width > 0));
+      if(SHOTS && width === 390) await page.screenshot({path:join(SHOTS,'pet-mobile.png')});
+    }
+    await page.setViewport({width:1280,height:900,deviceScaleFactor:1});
+    if (PET_ONLY) {
+      check('no console errors', errors.length === 0, errors.slice(0,5).join(' | '));
+      if(checks.some(ok => !ok)) process.exitCode = 1;
+      return;
+    }
+    await page.goto(`http://localhost:${PORT}/`, {waitUntil:'networkidle0'});
 
     if (SHOTS) {
       mkdirSync(SHOTS, { recursive: true });
